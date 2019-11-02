@@ -27,14 +27,17 @@ export class UserService {
     }
 
     async getRegistrationForm(id: string) {
-        const { info } = await this.findById(id);
-        const questions = prefillAnswer(registrationForm.questions, info);
+        const { info, image } = await this.findById(id);
+        const questions = prefillAnswer(registrationForm.questions, {
+            ...info,
+            image,
+        });
         return { ...registrationForm, questions };
     }
 
     async submitRegistrationForm(
         id: string,
-        userInfo: UserInfoDto,
+        { image: _, ...userInfo }: UserInfoDto,
         image: any,
     ) {
         const user = await this.findById(id);

@@ -5,6 +5,7 @@ import {
     Body,
     UseInterceptors,
     UploadedFile,
+    BadRequestException,
 } from '@nestjs/common';
 import { UserService } from './user.service';
 import { UserId } from './user.decorator';
@@ -16,10 +17,7 @@ import { FileInterceptor } from '@nestjs/platform-express';
 import { FileService } from '../file/file.service';
 @Controller('user')
 export class UserController {
-    constructor(
-        private readonly userService: UserService,
-        private readonly fileService: FileService,
-    ) {}
+    constructor(private readonly userService: UserService) {}
 
     @Authenticated()
     @Get('profile')
@@ -42,6 +40,10 @@ export class UserController {
         @Body() userInfo: UserInfoDto,
         @UploadedFile() file: any,
     ) {
-        return this.userService.submitRegistrationForm(userId, userInfo, file);
+        console.log(userInfo);
+        const url = file ? file.location : userInfo.image;
+        if (!url) throw new BadRequestException('Image is missing.');
+        // TODO delete old file
+        return this.userService.submitRegistrationForm(userId, userInfo, url);
     }
 }

@@ -89,4 +89,7 @@ export class UserInfoDto {
     @ApiModelProperty()
     @IsString()
     emergencyRelationship: string;
+
+    @ApiModelProperty()
+    image: any;
 }
