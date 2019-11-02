@@ -6,6 +6,7 @@ import {
     QUESTION_TYPES,
     QuestionDocument,
     QuestionTypes,
+    Choice,
 } from '../../form/question.model';
 import {
     FORM_MODEL,
@@ -81,12 +82,11 @@ export class SeederService {
                 const type = faker.random.arrayElement(
                     QUESTION_TYPES,
                 ) as QuestionTypes;
-                const choices: string[] = [];
+                const choices: Choice[] = [];
                 if (type === 'RADIO' || type === 'CHECKBOX') {
                     for (let j = 0; j < 4; j++) {
-                        choices.push(
-                            j + 1 + ': ' + faker.commerce.productName(),
-                        );
+                        const q = j + 1 + ': ' + faker.commerce.productName();
+                        choices.push({ label: q, value: q });
                     }
                 }
                 const label = faker.commerce.productName();

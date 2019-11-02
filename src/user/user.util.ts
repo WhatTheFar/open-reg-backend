@@ -7,6 +7,6 @@ export const parseUserInfo = ({
     ...info
 }: UserInfo): UserInfo => ({
     ...info,
-    title: TitleChoices[+title],
-    titleEn: TitleEnChoices[+titleEn],
+    title: TitleChoices[+title].value,
+    titleEn: TitleEnChoices[+titleEn].value,
 });

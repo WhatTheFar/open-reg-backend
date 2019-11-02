@@ -8,11 +8,26 @@ import {
     IsMongoId,
     IsInt,
 } from 'class-validator';
-import { QUESTION_TYPES, Question, QuestionTypes } from './question.model';
+import {
+    QUESTION_TYPES,
+    Question,
+    QuestionTypes,
+    Choice,
+} from './question.model';
 import { Type } from 'class-transformer';
 import { Form } from './form.model';
 import { FormGroup } from './form-group.model';
 import { ApiModelPropertyOptional, ApiModelProperty } from '@nestjs/swagger';
+
+export class ChoiceDTO implements Choice {
+    @ApiModelProperty()
+    @IsString()
+    label: string;
+
+    @ApiModelProperty()
+    @IsString()
+    value: string;
+}
 export class QuestionDTO implements Question {
     @ApiModelProperty()
     @IsIn(QUESTION_TYPES)
@@ -34,10 +49,10 @@ export class QuestionDTO implements Question {
     @IsInt()
     order: number;
 
-    @ApiModelProperty({ type: [String] })
+    @ApiModelProperty({ type: [ChoiceDTO] })
     @IsOptional()
     @IsArray()
-    choices: string[];
+    choices: ChoiceDTO[];
 
     @ApiModelProperty()
     @IsOptional()

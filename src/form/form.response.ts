@@ -2,6 +2,7 @@ import { FormGroup } from './form-group.model';
 import { ApiModelProperty, ApiModelPropertyOptional } from '@nestjs/swagger';
 import { Question, QuestionTypes } from './question.model';
 import { Form } from './form.model';
+import { ChoiceDTO } from './form.dto';
 
 export class FormGroupResponse implements FormGroup {
     @ApiModelProperty()
@@ -29,8 +30,8 @@ export class QuestionResponse implements Question {
     key: string;
     @ApiModelProperty()
     value: string;
-    @ApiModelProperty({ type: [String] })
-    choices: string[];
+    @ApiModelProperty({ type: [ChoiceDTO] })
+    choices: ChoiceDTO[];
     @ApiModelProperty()
     required: boolean;
     @ApiModelPropertyOptional()
