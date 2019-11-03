@@ -33,6 +33,8 @@ export class QuestionResponse implements Question {
     @ApiModelProperty({ type: [ChoiceDTO] })
     choices: ChoiceDTO[];
     @ApiModelProperty()
+    subChoices: any;
+    @ApiModelProperty()
     required: boolean;
     @ApiModelPropertyOptional()
     description?: string;
