@@ -28,11 +28,16 @@ export class FileService implements MulterOptionsFactory {
                 fileSize: 5e6, // 5 MB
             },
             fileFilter: (req, file, next) => {
-                const ext = path.extname(file.originalname).toLowerCase();
+                // @ts-ignore
+                const name = file.originalname || file.name;
+                const ext = path.extname(name).toLowerCase();
                 const allowed = ['.png', '.jpg', '.gif', '.jpeg'];
                 if (!allowed.includes(ext)) {
                     next(
-                        new BadRequestException('Only images are allowed!'),
+                        new BadRequestException(
+                            'Only images are allowed!',
+                            `Got '${ext}' (Expect: .png, .jpg, .gif, .jpeg)`,
+                        ),
                         false,
                     );
                 } else {
