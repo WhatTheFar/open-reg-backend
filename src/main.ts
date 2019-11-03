@@ -2,11 +2,12 @@ import { NestFactory } from '@nestjs/core';
 import { SwaggerModule, DocumentBuilder } from '@nestjs/swagger';
 import { AppModule } from './app.module';
 import { ValidationPipe } from '@nestjs/common';
+import { UnflattenPipe } from './pipes/UnflattenPipe';
 
 async function bootstrap() {
     const app = await NestFactory.create(AppModule);
     app.enableCors();
-    app.useGlobalPipes(new ValidationPipe());
+    app.useGlobalPipes(new UnflattenPipe(), new ValidationPipe());
     const options = new DocumentBuilder()
         .setTitle('Open Reg API')
         .setVersion('1.0')
