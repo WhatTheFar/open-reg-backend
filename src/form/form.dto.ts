@@ -55,6 +55,9 @@ export class QuestionDTO implements Question {
     choices: ChoiceDTO[];
 
     @ApiModelProperty()
+    subChoices: any;
+
+    @ApiModelProperty()
     @IsOptional()
     @IsBoolean()
     required: boolean;
