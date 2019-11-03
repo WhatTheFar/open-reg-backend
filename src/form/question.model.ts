@@ -23,7 +23,7 @@ export interface Question {
     order: number;
     group: number;
     type: QuestionTypes;
-    dependsOn?: number;
+    dependsOn?: string;
     label: string;
     key: string;
     choices?: Choice[];
@@ -76,7 +76,7 @@ export const QuestionSchema = new Schema({
         default: 1,
     },
     dependsOn: {
-        type: Number,
+        type: String,
         required: false,
     },
     type: {
