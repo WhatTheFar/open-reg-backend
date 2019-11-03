@@ -26,7 +26,14 @@ export class FormService {
     async findById(id: string) {
         const form = await this.formModel.findById(id).exec();
         if (!form) throw new NotFoundException('Invalid form id');
-        return form.toObject() as FormDocument;
+        const { questions, ...rest } = form.toObject();
+        return {
+            ...rest,
+            questions: questions.map(({ subChoices, ...rest }) => ({
+                ...rest,
+                subChoices: subChoices && Object.fromEntries(subChoices),
+            })),
+        } as FormDocument;
     }
 
     async findOldResponse(formId: string, userId: string) {
