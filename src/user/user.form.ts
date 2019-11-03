@@ -149,7 +149,7 @@ export const registrationForm: Form = {
         {
             order: 1,
             group: 3,
-            type: QuestionTypes.FILE,
+            type: QuestionTypes.IMAGE,
             label: 'Upload Image',
             key: 'image',
             required: true,

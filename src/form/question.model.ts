@@ -11,7 +11,7 @@ export enum QuestionTypes {
     TIME = 'TIME',
     DROPDOWN = 'DROPDOWN',
     SUBCHOICES = 'SUBCHOICES',
-    FILE = 'FILE',
+    IMAGE = 'IMAGE',
 }
 
 export interface Choice {
@@ -50,7 +50,7 @@ export const QUESTION_TYPES = [
     QuestionTypes.TIME,
     QuestionTypes.DROPDOWN,
     QuestionTypes.SUBCHOICES,
-    QuestionTypes.FILE,
+    QuestionTypes.IMAGE,
 ];
 
 export const QuestionSchema = new Schema({
