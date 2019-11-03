@@ -82,6 +82,10 @@ export class FileService implements MulterOptionsFactory {
     }
 
     deleteByUrl(url: string) {
-        return this.delete(this.getKeyFromUrl(url));
+        try {
+            return this.delete(this.getKeyFromUrl(url));
+        } catch (e) {
+            console.log(e);
+        }
     }
 }

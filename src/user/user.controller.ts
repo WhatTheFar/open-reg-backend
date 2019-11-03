@@ -44,7 +44,6 @@ export class UserController {
         }
         const url = file ? file.location : image;
         if (!url) throw new BadRequestException('Image is missing.');
-        // TODO delete old file
         return this.userService.submitRegistrationForm(userId, answer, url);
     }
 }
