@@ -53,6 +53,18 @@ export const QUESTION_TYPES = [
     QuestionTypes.IMAGE,
 ];
 
+export const ChoiceSchema = new Schema({
+    label: {
+        type: String,
+        required: true,
+    },
+    value: {
+        type: String,
+        required: false,
+        default: '',
+    },
+});
+
 export const QuestionSchema = new Schema({
     order: {
         type: Number,
@@ -81,23 +93,12 @@ export const QuestionSchema = new Schema({
         required: true,
     },
     choices: {
-        type: [
-            {
-                label: {
-                    type: String,
-                    required: true,
-                },
-                value: {
-                    type: String,
-                    required: true,
-                },
-            },
-        ],
+        type: [ChoiceSchema],
         required: false,
     },
     subChoices: {
         type: Map,
-        of: String,
+        of: [ChoiceSchema],
         required: false,
     },
     required: {
