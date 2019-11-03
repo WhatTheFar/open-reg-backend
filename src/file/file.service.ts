@@ -69,4 +69,19 @@ export class FileService implements MulterOptionsFactory {
             }
         });
     }
+
+    delete(key: string) {
+        const bucket = this.configService.awsS3BucketName;
+        const params = { Bucket: bucket, Key: key };
+        return this.S3.deleteObject(params).promise();
+    }
+
+    getKeyFromUrl(url: string) {
+        const key = url.split('/').slice(-1)[0];
+        return key;
+    }
+
+    deleteByUrl(url: string) {
+        return this.delete(this.getKeyFromUrl(url));
+    }
 }
