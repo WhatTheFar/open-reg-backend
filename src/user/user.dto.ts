@@ -1,15 +1,12 @@
-import { IsString, IsEmail, IsNumberString } from 'class-validator';
+import {
+    IsString,
+    IsEmail,
+    IsNumberString,
+    IsNotEmpty,
+    ValidateNested,
+} from 'class-validator';
 import { ApiModelProperty } from '@nestjs/swagger';
-
-// export class CreateUserDTO {
-//     @ApiModelProperty()
-//     @IsString()
-//     username: string;
-
-//     @ApiModelProperty()
-//     @IsString()
-//     password: string;
-// }
+import { Type } from 'class-transformer';
 
 export class CreateUserFromChulaSsoDTO {
     @IsString()
@@ -89,7 +86,15 @@ export class UserInfoDto {
     @ApiModelProperty()
     @IsString()
     emergencyRelationship: string;
+}
+
+export class RegisterUserDTO {
+    @ValidateNested()
+    @ApiModelProperty({ type: UserInfoDto })
+    @Type(() => UserInfoDto)
+    answer: UserInfoDto;
 
     @ApiModelProperty()
+    @IsNotEmpty()
     image: any;
 }

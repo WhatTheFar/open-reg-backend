@@ -37,7 +37,7 @@ export class UserService {
 
     async submitRegistrationForm(
         id: string,
-        { image: _, ...userInfo }: UserInfoDto,
+        userInfo: UserInfoDto,
         image: any,
     ) {
         const user = await this.findById(id);
