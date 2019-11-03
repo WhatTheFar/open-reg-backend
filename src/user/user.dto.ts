@@ -95,6 +95,5 @@ export class RegisterUserDTO {
     answer: UserInfoDto;
 
     @ApiModelProperty()
-    @IsNotEmpty()
     image: any;
 }

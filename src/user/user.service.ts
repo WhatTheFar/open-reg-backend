@@ -4,10 +4,12 @@ import { USER_MODEL, UserModel, User } from './user.model';
 import { CreateUserFromChulaSsoDTO, UserInfoDto } from './user.dto';
 import { registrationForm } from './user.form';
 import { prefillAnswer } from '../form/form.utils';
+import { FileService } from '../file/file.service';
 @Injectable()
 export class UserService {
     constructor(
         @InjectModel(USER_MODEL) private readonly userModel: UserModel,
+        private readonly fileService: FileService,
     ) {}
 
     createUserFromChulaSso(info: CreateUserFromChulaSsoDTO) {
@@ -48,5 +50,10 @@ export class UserService {
             { $set: { info: newInfo, image } },
             { new: true },
         );
+    }
+
+    async deleteOldImage(id: string) {
+        const { image } = await this.findById(id);
+        return this.fileService.deleteByUrl(image);
     }
 }

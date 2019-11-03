@@ -34,19 +34,17 @@ export class UserController {
     @UseInterceptors(FileInterceptor('image'))
     @Authenticated()
     @Post('form')
-    submitRegistrationForm(
+    async submitRegistrationForm(
         @UserId() userId: string,
-        @Body() body: RegisterUserDTO,
+        @Body() { image, answer }: RegisterUserDTO,
         @UploadedFile() file: any,
     ) {
-        console.log(body);
-        const url = file ? file.location : body.image;
+        if (file) {
+            await this.userService.deleteOldImage(userId);
+        }
+        const url = file ? file.location : image;
         if (!url) throw new BadRequestException('Image is missing.');
         // TODO delete old file
-        return this.userService.submitRegistrationForm(
-            userId,
-            body.answer,
-            url,
-        );
+        return this.userService.submitRegistrationForm(userId, answer, url);
     }
 }

@@ -7,9 +7,11 @@ import { MulterModule } from '@nestjs/platform-express';
 import { ConfigModule } from '../config/config.module';
 import { FileService } from '../file/file.service';
 import { ConfigService } from 'aws-sdk';
+import { FileModule } from '../file/file.module';
 
 @Module({
     imports: [
+        FileModule,
         MongooseModule.forFeature([{ name: USER_MODEL, schema: UserSchema }]),
         MulterModule.registerAsync({
             imports: [ConfigModule],
