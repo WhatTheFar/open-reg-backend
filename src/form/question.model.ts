@@ -32,9 +32,10 @@ export interface Question {
     };
     required: boolean;
     description?: string;
+    image?: string
 }
 
-export interface QuestionDocument extends Document, Question {}
+export interface QuestionDocument extends Document, Question { }
 
 export type QuestionModel = Model<QuestionDocument>;
 
@@ -107,6 +108,10 @@ export const QuestionSchema = new Schema({
         required: false,
     },
     description: {
+        type: String,
+        required: false,
+    },
+    image: {
         type: String,
         required: false,
     },
