@@ -11,12 +11,12 @@ export class ResponseService {
         @InjectModel(RESPONSE_MODEL)
         private readonly responseModel: ResponseModel,
         private readonly formService: FormService,
-    ) {}
+    ) { }
 
-    async submitResponse({ answers, form }: SubmitResponseDTO, userId: string) {
+    async submitResponse({ answer, form }: SubmitResponseDTO, userId: string) {
         const checkForm = await this.formService.findById(form);
         if (!checkForm) throw new BadRequestException('Invalid form id');
-        const responseIsValid = validateResponse(checkForm.questions, answers);
+        const responseIsValid = validateResponse(checkForm.questions, answer);
         if (!responseIsValid) throw new BadRequestException('Invalid response');
         const query = {
             user: userId,
@@ -27,7 +27,7 @@ export class ResponseService {
             {
                 $setOnInsert: query,
                 $set: {
-                    answers,
+                    answer,
                 },
             },
             { new: true, upsert: true },
