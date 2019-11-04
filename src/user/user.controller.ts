@@ -16,7 +16,7 @@ import { FormResponse } from '../form/form.response';
 import { FileInterceptor } from '@nestjs/platform-express';
 @Controller('user')
 export class UserController {
-    constructor(private readonly userService: UserService) {}
+    constructor(private readonly userService: UserService) { }
 
     @Authenticated()
     @Get('profile')
@@ -36,7 +36,7 @@ export class UserController {
     @Post('form')
     async submitRegistrationForm(
         @UserId() userId: string,
-        @Body() { image, answer }: RegisterUserDTO,
+        @Body() { image, answers }: RegisterUserDTO,
         @UploadedFile() file: any,
     ) {
         if (file) {
@@ -44,6 +44,6 @@ export class UserController {
         }
         const url = file ? file.location : image;
         if (!url) throw new BadRequestException('Image is missing.');
-        return this.userService.submitRegistrationForm(userId, answer, url);
+        return this.userService.submitRegistrationForm(userId, answers, url);
     }
 }

@@ -13,10 +13,10 @@ export class ResponseService {
         private readonly formService: FormService,
     ) { }
 
-    async submitResponse({ answer, form }: SubmitResponseDTO, userId: string) {
+    async submitResponse({ answers, form }: SubmitResponseDTO, userId: string) {
         const checkForm = await this.formService.findById(form);
         if (!checkForm) throw new BadRequestException('Invalid form id');
-        const responseIsValid = validateResponse(checkForm.questions, answer);
+        const responseIsValid = validateResponse(checkForm.questions, answers);
         if (!responseIsValid) throw new BadRequestException('Invalid response');
         const query = {
             user: userId,
@@ -27,7 +27,7 @@ export class ResponseService {
             {
                 $setOnInsert: query,
                 $set: {
-                    answer,
+                    answers,
                 },
             },
             { new: true, upsert: true },

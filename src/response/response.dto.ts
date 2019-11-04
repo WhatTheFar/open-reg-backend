@@ -8,7 +8,7 @@ export class SubmitResponseDTO {
 
     @ApiModelProperty()
     @IsNotEmpty()
-    answer: {
+    answers: {
         [key: string]: string;
     };
 }

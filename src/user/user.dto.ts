@@ -92,7 +92,7 @@ export class RegisterUserDTO {
     @ValidateNested()
     @ApiModelProperty({ type: UserInfoDto })
     @Type(() => UserInfoDto)
-    answer: UserInfoDto;
+    answers: UserInfoDto;
 
     @ApiModelProperty()
     image: any;

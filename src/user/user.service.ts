@@ -10,7 +10,7 @@ export class UserService {
     constructor(
         @InjectModel(USER_MODEL) private readonly userModel: UserModel,
         private readonly fileService: FileService,
-    ) {}
+    ) { }
 
     createUserFromChulaSso(info: CreateUserFromChulaSsoDTO) {
         return this.userModel
