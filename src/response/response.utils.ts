@@ -5,10 +5,6 @@ import { Response } from './response.model';
 import { User } from '../user/user.model';
 import { parseUserInfo } from '../user/user.util';
 
-function isNumeric(value: string) {
-    return /^\d+$/.test(value);
-}
-
 export const validateResponse = (
     questions: Question[],
     answers: { [key: string]: string },
@@ -20,8 +16,7 @@ export const validateResponse = (
             if (answer === '') return false;
         }
         if (hasChoices(question)) {
-            if (!isNumeric(answer)) return false;
-            if (+answer >= question.choices.length) return false;
+            if (!question.choices.some(({ value }) => value === answer)) return false;
         }
         return true;
     });
