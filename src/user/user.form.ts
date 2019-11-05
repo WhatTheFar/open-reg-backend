@@ -155,6 +155,7 @@ export const registrationForm: Form = {
             required: true,
             image:
                 'https://openreg.s3-ap-southeast-1.amazonaws.com/profile.jpg',
+            description: 'หมายเหตุ: ขนาดรูปห้ามเกิน3MB'
         },
     ],
 };
