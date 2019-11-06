@@ -155,7 +155,7 @@ export const registrationForm: Form = {
             required: true,
             image:
                 'https://openreg.s3-ap-southeast-1.amazonaws.com/profile.jpg',
-            description: 'หมายเหตุ: ขนาดรูปห้ามเกิน3MB'
+            description: 'หมายเหตุ:  แนบรูปเดี่ยวของตัวท่านเอง หน้าตรง เห็นใบหน้าชัดเจน ไม่สวมหมวกหรือแว่นตาดำ ขนาดรูปไม่เกิน 3MB [crop image](https://www.iloveimg.com/crop-image)'
         },
     ],
 };
