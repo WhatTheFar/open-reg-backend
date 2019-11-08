@@ -42,6 +42,16 @@ services:
       - 'traefik.http.routers.fullmoon.tls.certresolver=myhttpchallenge'
       - 'traefik.http.services.fullmoon.loadbalancer.server.port=4200'
 
+  frontend-cutuball:
+    image: open-reg-frontend-cutuball
+    container_name: open-reg-frontend-cutuball
+    labels:
+      - 'traefik.enable=true'
+      - 'traefik.http.routers.cutuball.rule=Host(`cutuball.openreg.app`)'
+      - 'traefik.http.routers.cutuball.entrypoints=websecure'
+      - 'traefik.http.routers.cutuball.tls.certresolver=myhttpchallenge'
+      - 'traefik.http.services.cutuball.loadbalancer.server.port=4200'
+
   backend:
     container_name: open-reg-backend-prod
     build: .
