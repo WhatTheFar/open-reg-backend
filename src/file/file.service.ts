@@ -49,13 +49,15 @@ export class FileService implements MulterOptionsFactory {
                 bucket: this.configService.awsS3BucketName,
                 acl: 'public-read',
                 key: (request, file, next) => {
+                    const name = file.originalname;
+                    const ext = path.extname(name).toLowerCase();
                     const override = request.body.override || 'open-reg';
                     const orig = createHash('md5')
-                        .update(file.originalname)
+                        .update(name)
                         .digest('hex');
                     const now = Date.now().toString();
 
-                    const fileName = [override, orig, now].join('-');
+                    const fileName = [override, orig, now, ext].join('-');
 
                     next(null, fileName);
                 },
